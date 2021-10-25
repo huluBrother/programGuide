@@ -1,0 +1,9 @@
+CREATE TABLE `zhanghx`.`Untitled`  (
+  `userid` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(30) NULL DEFAULT NULL,
+  `userpwd` varchar(30) NULL DEFAULT NULL,
+  `usersex` varchar(2) NULL DEFAULT NULL,
+  `phonenumber` varchar(30) NULL DEFAULT NULL,
+  `qqnumber` varchar(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`userid`)
+) ENGINE = InnoDB CHARACTER SET = utf8;
