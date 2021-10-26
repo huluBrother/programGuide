@@ -66,4 +66,26 @@ public class JdbcUtils {
             throwables.printStackTrace();
         }
     }
+
+    public static void closeStatement(Statement statement) {
+
+        try {
+            if (statement != null) {
+                statement.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void rollback(Connection conn) {
+
+        try {
+            if (conn != null) {
+                conn.rollback();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
