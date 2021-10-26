@@ -1,7 +1,7 @@
 package org.zhanghx.webdemo.webdemo.web.listener;
 
 
-import org.zhanghx.webdemo.webdemo.commons.Constans;
+import org.zhanghx.webdemo.webdemo.commons.Constants;
 import org.zhanghx.webdemo.webdemo.pojo.Users;
 
 import javax.servlet.ServletContext;
@@ -21,7 +21,7 @@ public class HttpSessionLifeCycleListener implements HttpSessionListener {
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
         HttpSession session = se.getSession();
-        Users user = (Users)session.getAttribute(Constans.USER_SESSION_KEY);
+        Users user = (Users)session.getAttribute(Constants.USER_SESSION_KEY);
         ServletContext servletContext = session.getServletContext();
         servletContext.removeAttribute(Integer.valueOf(user.getUserId()).toString());
 
