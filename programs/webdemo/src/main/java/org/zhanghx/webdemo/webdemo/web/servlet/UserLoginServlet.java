@@ -43,7 +43,8 @@ public class UserLoginServlet extends HttpServlet {
 
         }catch (UserNotFoundException e){
             //用户名或者密码错误,转发到登录界面
-            req.getRequestDispatcher("").forward(req,resp);
+            req.setAttribute(Constans.ERROR_MESSAGE,e.getMessage());
+            req.getRequestDispatcher("login.jsp").forward(req,resp);
         }catch (Exception e){
             //不可知的异常
             resp.sendRedirect("error.jsp");

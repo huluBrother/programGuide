@@ -37,7 +37,7 @@
 
 <div class="loginbody">
 
-
+    ${msg}
     <div class="loginbox loginbox2">
 
         <ul>
