@@ -23,6 +23,9 @@ public class JdbcUtils {
             //加载数据库驱动
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }catch (Exception e){
             e.printStackTrace();
         }
     }

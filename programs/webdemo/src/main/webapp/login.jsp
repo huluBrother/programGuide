@@ -41,10 +41,11 @@
     <div class="loginbox loginbox2">
 
         <ul>
-            <form action="" method="post">
+            <form action="login.do" method="post">
                 <li><input name="username" type="text" class="loginuser" value="admin"
                            onclick="JavaScript:this.value=''"/></li>
-                <li><input name="userpwd" type="text" class="loginpwd" value="password" onclick="JavaScript:this.value=''"/>
+                <li><input name="userpwd" type="text" class="loginpwd" value="password"
+                           onclick="JavaScript:this.value=''"/>
                 </li>
                 <li class="yzm">
                 <span><input name="" type="text" value="验证码"

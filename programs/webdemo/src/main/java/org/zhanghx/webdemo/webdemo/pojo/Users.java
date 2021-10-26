@@ -55,4 +55,16 @@ public class Users {
     public void setQqnumber(String qqnumber) {
         this.qqnumber = qqnumber;
     }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", userpwd='" + userpwd + '\'' +
+                ", usersex='" + usersex + '\'' +
+                ", phonenumber='" + phonenumber + '\'' +
+                ", qqnumber='" + qqnumber + '\'' +
+                '}';
+    }
 }

@@ -17,6 +17,14 @@
     </properties>
 
     <dependencies>
+
+        <!--单元测试类 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
         <!--servlet 组件jar包-->
         <dependency>
             <groupId>javax.servlet</groupId>

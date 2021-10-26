@@ -17,6 +17,7 @@ public class UserLoginDaoImpl implements UserLoginDao {
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
         try{
+            System.out.println("进行查询中..........");
             conn = JdbcUtils.getConnection();
             preparedStatement = conn.prepareStatement("select * from users where username = ? and userpwd = ?");
             preparedStatement.setString(1,username);
@@ -32,6 +33,7 @@ public class UserLoginDaoImpl implements UserLoginDao {
                 user.setPhonenumber(rs.getString("phonenumber"));
                 user.setQqnumber(rs.getString("qqnumber"));
             }
+            System.out.println("查询成功...........\n" + user);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {

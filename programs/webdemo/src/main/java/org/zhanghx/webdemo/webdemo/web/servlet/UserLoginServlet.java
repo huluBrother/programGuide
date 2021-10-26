@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebServlet(value = "login.do")
+@WebServlet(name = "userLoginServlet",value = "/login.do")
 public class UserLoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,6 +28,7 @@ public class UserLoginServlet extends HttpServlet {
         String username = req.getParameter("username");
         String userpwd = req.getParameter("userpwd");
 
+        System.out.println("获得参数: username=" + username +" userpwd=" + userpwd);
         try{
             UserLoginService userLoginService = new UserLoginServiceImpl();
             Users users = userLoginService.userLogin(username, userpwd);
@@ -47,6 +48,5 @@ public class UserLoginServlet extends HttpServlet {
             //不可知的异常
             resp.sendRedirect("error.jsp");
         }
-
     }
 }

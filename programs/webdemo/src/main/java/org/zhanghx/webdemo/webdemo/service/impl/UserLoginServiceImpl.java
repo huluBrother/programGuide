@@ -9,6 +9,7 @@ import org.zhanghx.webdemo.webdemo.service.UserLoginService;
 public class UserLoginServiceImpl implements UserLoginService {
     @Override
     public Users userLogin(String username, String userpwd) {
+        System.out.println("开始查询数据库......");
         UserLoginDao dao = new UserLoginDaoImpl();
         Users users = dao.selectUsersByUsernameAndUserpwd(username, userpwd);
 
