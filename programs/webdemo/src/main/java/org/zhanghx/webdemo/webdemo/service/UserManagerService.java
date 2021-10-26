@@ -9,4 +9,8 @@ public interface UserManagerService {
     void addUser(Users user);
 
     List<Users> findUser(Users users);
+
+    Users findUserByUserid(int userid);
+
+    void modifyUser(Users user);
 }

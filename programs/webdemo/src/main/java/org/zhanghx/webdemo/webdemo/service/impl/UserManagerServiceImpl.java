@@ -20,4 +20,16 @@ public class UserManagerServiceImpl implements UserManagerService {
         List<Users> users1 = dao.selectUsersByProperty(users);
         return users1;
     }
+
+    @Override
+    public Users findUserByUserid(int userid) {
+        UserManagerDao dao = new UserManagerDaoImpl();
+        return dao.selectUserByUserid(userid);
+    }
+
+    @Override
+    public void modifyUser(Users user) {
+        UserManagerDao dao = new UserManagerDaoImpl();
+        dao.updateUserByUserid(user);
+    }
 }

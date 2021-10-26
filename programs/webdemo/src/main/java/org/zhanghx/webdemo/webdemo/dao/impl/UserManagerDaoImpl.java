@@ -7,7 +7,6 @@ import org.zhanghx.webdemo.webdemo.pojo.Users;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +74,71 @@ public class UserManagerDaoImpl implements UserManagerDao {
             JdbcUtils.closeStatementAndResult(statement,rs);
         }
         return users;
+    }
+
+    @Override
+    public Users selectUserByUserid(int userid) {
+        Users  users = null;
+        Connection conn = null;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try{
+            conn = JdbcUtils.getConnection();
+            conn.setAutoCommit(false);
+            String sql = "select * from users where userid = ?";
+            System.out.println("执行的SQL : " + sql);
+            statement = conn.prepareStatement(sql);
+            statement.setInt(1,userid);
+            rs = statement.executeQuery();
+            conn.commit();
+
+            while(rs.next()){
+                users = new Users();
+                users.setUserId(rs.getInt("userid"));
+                users.setUsername(rs.getString("username"));
+                users.setUserpwd(rs.getString("userpwd"));
+                users.setUsersex(rs.getString("usersex"));
+                users.setPhonenumber(rs.getString("phonenumber"));
+                users.setQqnumber(rs.getString("qqnumber"));
+            }
+            System.out.println("查询到结果:" + users);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JdbcUtils.rollback(conn);
+        } finally {
+            JdbcUtils.closeConnection(conn);
+            JdbcUtils.closeStatementAndResult(statement,rs);
+        }
+        return users;
+    }
+
+    @Override
+    public void updateUserByUserid(Users user) {
+        Connection conn = null;
+        PreparedStatement statement = null;
+        try{
+            conn = JdbcUtils.getConnection();
+            conn.setAutoCommit(false);
+            String sql = "update users set username = ?, usersex = ?, phonenumber = ?,qqnumber=?  where userid = ?";
+
+            statement = conn.prepareStatement(sql);
+            statement.setString(1,user.getUsername());
+            statement.setString(2,user.getUsersex());
+            statement.setString(3,user.getPhonenumber());
+            statement.setString(4,user.getQqnumber());
+            statement.setInt(5,user.getUserId());
+            System.out.println(statement.toString());
+            boolean execute = statement.execute();
+            conn.commit();
+
+            System.out.println("查询到结果:" + execute);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JdbcUtils.rollback(conn);
+        } finally {
+            JdbcUtils.closeConnection(conn);
+            JdbcUtils.closeStatement(statement);
+        }
     }
 
     private String createSQL(Users user){

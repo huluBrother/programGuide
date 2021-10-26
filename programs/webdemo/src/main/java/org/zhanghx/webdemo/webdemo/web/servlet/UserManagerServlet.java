@@ -32,9 +32,15 @@ public class UserManagerServlet extends HttpServlet {
         }else if("findUser".equals(flag)){
             findUser(req,resp);
             return;
+        }else if("preupdate".equals(flag)){
+            preUpdate(req,resp);
+            return;
+        }else if("modifyUser".equals(flag)){
+            modifyUser(req,resp);
+            return;
         }
 
-        req.setAttribute(Constants.ERROR_MESSAGE,"没有相应的标签操作");
+        System.out.println("没有相应的标签操作");
         resp.sendRedirect("error.jsp");
     }
 
@@ -72,8 +78,37 @@ public class UserManagerServlet extends HttpServlet {
 
     }
 
+    private void preUpdate(HttpServletRequest req,HttpServletResponse resp) throws IOException {
+        String userid = req.getParameter("userid");
+        try{
+            UserManagerService service = new UserManagerServiceImpl();
+            Users user = service.findUserByUserid(Integer.parseInt(userid));
+            req.setAttribute("user",user);
+            System.out.println("待更新用户内容:" + user);
+            req.getRequestDispatcher("usermanager/updateUser.jsp").forward(req,resp);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            resp.sendRedirect("error.jsp");
+        }
+    }
+
+    private void modifyUser(HttpServletRequest req,HttpServletResponse resp) throws IOException {
+        Users user = createUser(req);
+        try{
+            user.setUserId(Integer.parseInt(req.getParameter("userid")));
+            UserManagerService service = new UserManagerServiceImpl();
+            service.modifyUser(user);
+            resp.sendRedirect("ok.jsp");
+        }catch (Exception e){
+            e.printStackTrace();
+            resp.sendRedirect("error.jsp");
+        }
+    }
+
     private Users createUser(HttpServletRequest req){
         Users user = new Users();
+
         user.setUsername(req.getParameter("username"));
         user.setUserpwd(req.getParameter("userpwd"));
         user.setUsersex(req.getParameter("usersex"));
