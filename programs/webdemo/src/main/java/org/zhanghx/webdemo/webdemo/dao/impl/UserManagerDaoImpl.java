@@ -141,6 +141,31 @@ public class UserManagerDaoImpl implements UserManagerDao {
         }
     }
 
+    @Override
+    public void deleteUserByUserid(int userid) {
+        Connection conn = null;
+        PreparedStatement statement = null;
+        try{
+            conn = JdbcUtils.getConnection();
+            conn.setAutoCommit(false);
+            String sql = "delete from users where userid=?";
+
+            statement = conn.prepareStatement(sql);
+            statement.setInt(1,userid);
+            System.out.println(statement.toString());
+            boolean execute = statement.execute();
+            conn.commit();
+
+            System.out.println("删除的结果:" + execute);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JdbcUtils.rollback(conn);
+        } finally {
+            JdbcUtils.closeConnection(conn);
+            JdbcUtils.closeStatement(statement);
+        }
+    }
+
     private String createSQL(Users user){
         StringBuffer buffer = new StringBuffer("select * from users where 1 = 1 ");
 

@@ -38,6 +38,9 @@ public class UserManagerServlet extends HttpServlet {
         }else if("modifyUser".equals(flag)){
             modifyUser(req,resp);
             return;
+        }else if("deleteUser".equals(flag)){
+            dropUser(req,resp);
+            return;
         }
 
         System.out.println("没有相应的标签操作");
@@ -99,6 +102,18 @@ public class UserManagerServlet extends HttpServlet {
             user.setUserId(Integer.parseInt(req.getParameter("userid")));
             UserManagerService service = new UserManagerServiceImpl();
             service.modifyUser(user);
+            resp.sendRedirect("ok.jsp");
+        }catch (Exception e){
+            e.printStackTrace();
+            resp.sendRedirect("error.jsp");
+        }
+    }
+
+    private void dropUser(HttpServletRequest req,HttpServletResponse resp) throws IOException {
+        String userid = req.getParameter("userid");
+        try{
+            UserManagerService service = new UserManagerServiceImpl();
+            service.dropUser(Integer.parseInt(userid));
             resp.sendRedirect("ok.jsp");
         }catch (Exception e){
             e.printStackTrace();

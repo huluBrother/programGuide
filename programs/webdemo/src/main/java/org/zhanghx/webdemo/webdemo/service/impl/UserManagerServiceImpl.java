@@ -32,4 +32,10 @@ public class UserManagerServiceImpl implements UserManagerService {
         UserManagerDao dao = new UserManagerDaoImpl();
         dao.updateUserByUserid(user);
     }
+
+    @Override
+    public void dropUser(int userid) {
+        UserManagerDao dao = new UserManagerDaoImpl();
+        dao.deleteUserByUserid(userid);
+    }
 }

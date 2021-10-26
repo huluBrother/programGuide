@@ -12,4 +12,6 @@ public interface UserManagerDao {
     Users selectUserByUserid(int userid);
 
     void updateUserByUserid(Users user);
+
+    void deleteUserByUserid(int userid);
 }

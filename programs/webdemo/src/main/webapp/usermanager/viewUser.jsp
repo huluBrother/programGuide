@@ -55,8 +55,9 @@
             </td>
             <td>${user.phonenumber}</td>
             <td>${user.qqnumber}</td>
-            <td><a href="usermanager.do?flag=preupdate&userid=${user.userId}" class="tablelink">修改</a> &nbsp;&nbsp;&nbsp;&nbsp;  <a href="#" class="tablelink click"> 删除</a></td>
+            <td><a href="usermanager.do?flag=preupdate&userid=${user.userId}" class="tablelink">修改</a> &nbsp;&nbsp;&nbsp;&nbsp;  <a href="usermanager.do?flag=deleteUser&userid=${user.userId}" class="tablelink click"> 删除</a></td>
         </tr>
+
         </c:forEach>
 
         </tbody>
