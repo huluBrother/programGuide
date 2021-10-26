@@ -51,7 +51,7 @@
                              onclick="JavaScript:this.value=''"/></span><cite>X3D5S</cite>
                 </li>
                 <li><input name="" type="submit" class="loginbtn" value="登录"
-                           onclick="javascript:window.location='main.html'"/></li>
+                           onclick="javascript:window.location='main.jsp'"/></li>
             </form>
         </ul>
 
