@@ -6,6 +6,7 @@ import org.zhanghx.webdemo.webdemo.pojo.Users;
 import org.zhanghx.webdemo.webdemo.service.UserLoginService;
 import org.zhanghx.webdemo.webdemo.service.impl.UserLoginServiceImpl;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,15 +38,29 @@ public class UserLoginServlet extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute(Constans.USER_SESSION_KEY,users);
 
+            //判断是否已经存在了登录的会话
+            ServletContext servletContext = this.getServletContext();
+            HttpSession lastSession = (HttpSession)servletContext.getAttribute(Integer.valueOf(users.getUserId()).toString());
+            if(lastSession != null){
+                System.out.println("已经存在会话,将移除sessionID=" + lastSession.getId());
+                servletContext.removeAttribute(Integer.valueOf(users.getUserId()).toString());
+                lastSession.invalidate();
+            }
+
+            //将session保存到全局容器(这里的key使用了user的ID,有点草率)
+            servletContext.setAttribute(Integer.valueOf(users.getUserId()).toString(),session);
+
             //这里选择重定向，数据有前端操作
             resp.sendRedirect("main.jsp");
 
 
         }catch (UserNotFoundException e){
+            e.printStackTrace();
             //用户名或者密码错误,转发到登录界面
             req.setAttribute(Constans.ERROR_MESSAGE,e.getMessage());
             req.getRequestDispatcher("login.jsp").forward(req,resp);
         }catch (Exception e){
+            e.printStackTrace();
             //不可知的异常
             resp.sendRedirect("error.jsp");
         }
