@@ -6,7 +6,10 @@ import org.zhanghx.webdemo.webdemo.pojo.Users;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserManagerDaoImpl implements UserManagerDao {
     @Override
@@ -35,5 +38,65 @@ public class UserManagerDaoImpl implements UserManagerDao {
             JdbcUtils.closeConnection(conn);
             JdbcUtils.closeStatement(statement);
         }
+    }
+
+    @Override
+    public List<Users> selectUsersByProperty(Users user) {
+        List<Users>  users = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try{
+            conn = JdbcUtils.getConnection();
+            conn.setAutoCommit(false);
+            String sql = createSQL(user);
+            System.out.println("执行的SQL : " + sql);
+            statement = conn.prepareStatement(sql);
+            rs = statement.executeQuery();
+            conn.commit();
+
+            while(rs.next()){
+                Users u = new Users();
+                u.setUserId(rs.getInt("userid"));
+                u.setUsername(rs.getString("username"));
+                u.setUserpwd(rs.getString("userpwd"));
+                u.setUsersex(rs.getString("usersex"));
+                u.setPhonenumber(rs.getString("phonenumber"));
+                u.setQqnumber(rs.getString("qqnumber"));
+
+                users.add(u);
+            }
+            System.out.println("查询到结果行数:" + users.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+            JdbcUtils.rollback(conn);
+        } finally {
+            JdbcUtils.closeConnection(conn);
+            JdbcUtils.closeStatementAndResult(statement,rs);
+        }
+        return users;
+    }
+
+    private String createSQL(Users user){
+        StringBuffer buffer = new StringBuffer("select * from users where 1 = 1 ");
+
+        if(user.getUsername() != null && user.getUsername().length() > 0){
+            buffer.append(" and username=").append(user.getUsername());
+        }
+        if(user.getUserpwd() != null && user.getUserpwd().length() > 0){
+            buffer.append(" and userpwd=").append(user.getUserpwd());
+        }
+        if(user.getUsersex() != null && user.getUsersex().length() > 0){
+            buffer.append(" and usersex=").append(user.getUsersex());
+        }
+        if(user.getPhonenumber() != null && user.getPhonenumber().length() > 0){
+            buffer.append(" and phonenumber=").append(user.getPhonenumber());
+        }
+        if(user.getQqnumber() != null && user.getQqnumber().length() > 0){
+            buffer.append(" and qqnumber=").append(user.getQqnumber());
+        }
+
+
+        return buffer.toString();
     }
 }

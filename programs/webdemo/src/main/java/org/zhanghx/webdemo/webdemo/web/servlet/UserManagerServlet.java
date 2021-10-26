@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 @WebServlet("/usermanager.do")
@@ -27,6 +28,9 @@ public class UserManagerServlet extends HttpServlet {
         System.out.println("接受到新的请求" + flag);
         if("adduser".equals(flag)){
             addUser(req,resp);
+            return;
+        }else if("findUser".equals(flag)){
+            findUser(req,resp);
             return;
         }
 
@@ -50,6 +54,24 @@ public class UserManagerServlet extends HttpServlet {
 
     }
 
+    private void findUser(HttpServletRequest req,HttpServletResponse resp) throws IOException {
+        Users user = createUser(req);
+
+        try{
+            UserManagerService service = new UserManagerServiceImpl();
+            List<Users> list = service.findUser(user);
+            req.setAttribute("list",list);
+
+
+            req.getRequestDispatcher("usermanager/viewUser.jsp").forward(req,resp);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            resp.sendRedirect("error.jsp");
+        }
+
+    }
+
     private Users createUser(HttpServletRequest req){
         Users user = new Users();
         user.setUsername(req.getParameter("username"));
@@ -57,7 +79,7 @@ public class UserManagerServlet extends HttpServlet {
         user.setUsersex(req.getParameter("usersex"));
         user.setPhonenumber(req.getParameter("phonenumber"));
         user.setQqnumber(req.getParameter("qqnumber"));
-
+        System.out.println(user);
         return user;
     }
 }

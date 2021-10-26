@@ -5,10 +5,19 @@ import org.zhanghx.webdemo.webdemo.dao.impl.UserManagerDaoImpl;
 import org.zhanghx.webdemo.webdemo.pojo.Users;
 import org.zhanghx.webdemo.webdemo.service.UserManagerService;
 
+import java.util.List;
+
 public class UserManagerServiceImpl implements UserManagerService {
     @Override
     public void addUser(Users user) {
         UserManagerDao dao = new UserManagerDaoImpl();
         dao.inserUser(user);
+    }
+
+    @Override
+    public List<Users> findUser(Users users) {
+        UserManagerDao dao = new UserManagerDaoImpl();
+        List<Users> users1 = dao.selectUsersByProperty(users);
+        return users1;
     }
 }
