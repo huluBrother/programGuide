@@ -1,8 +1,6 @@
 package org.zhanghx.webdemo.webdemo.commons;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class JdbcUtils {
@@ -46,6 +44,20 @@ public class JdbcUtils {
         try {
             if (conn != null) {
                 conn.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void closeStatementAndResult(Statement statement, ResultSet rs) {
+
+        try {
+            if (statement != null) {
+                statement.close();
+            }
+            if(rs != null){
+                rs.close();
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
