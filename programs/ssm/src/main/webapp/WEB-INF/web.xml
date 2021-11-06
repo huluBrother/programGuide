@@ -4,4 +4,42 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+  <!--指定spring位置文件的位置已经名称-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext_*.xml</param-value>
+  </context-param>
+
+  <!--配置字符编码过滤器-->
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!--配置启动spring框架的监听器-->
+  <listener>
+    <listener-class>org.springframework.web.context.ConfigurableWebApplicationContext</listener-class>
+  </listener>
+
+  <!--配置springmvc的前端控制器-->
+  <servlet>
+    <servlet-name>spirnmvc</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:springmvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>spirnmvc</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+
 </web-app>
