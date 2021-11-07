@@ -23,7 +23,7 @@
 
   <!--配置启动spring框架的监听器-->
   <listener>
-    <listener-class>org.springframework.web.context.ConfigurableWebApplicationContext</listener-class>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
   <!--配置springmvc的前端控制器-->
