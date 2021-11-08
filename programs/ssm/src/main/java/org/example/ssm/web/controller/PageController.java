@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("page")
 public class PageController {
 
     @RequestMapping("/")
@@ -14,7 +13,7 @@ public class PageController {
         return "index";
     }
 
-    @RequestMapping("/{pg}")
+    @RequestMapping("/page/{pg}")
     public String showPage(@PathVariable(value = "pg") String pg){
         System.out.println("请求跳转的页面:" + pg);
         return pg;
