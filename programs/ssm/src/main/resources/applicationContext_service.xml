@@ -7,5 +7,5 @@
 ">
 
     <!-- 配置好注解扫描-->
-    <context:component-scan base-package="org.example.ssm.service"/>
+    <context:component-scan base-package="org.example.ssm.service,org.example.ssm.aop"/>
 </beans>

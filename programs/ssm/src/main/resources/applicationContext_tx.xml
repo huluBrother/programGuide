@@ -19,6 +19,7 @@
             <tx:method name="modify*" propagation="REQUIRED"/>
             <tx:method name="drop*" propagation="REQUIRED"/>
             <tx:method name="find*" propagation="REQUIRED"/>
+            <tx:method name="userLogin" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
 
@@ -27,5 +28,8 @@
         <aop:pointcut id="myPointcut" expression="execution(* org.example.ssm.service.*.*(..))"/>
         <aop:advisor advice-ref="myAdvice" pointcut-ref="myPointcut"/>
     </aop:config>
+
+    <!--配置动态代理的选择 true = cglib ，false=jdk代理 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
 </beans>
