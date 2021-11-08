@@ -45,7 +45,7 @@
             <td>${user.username}</td>
             <td>
                 <c:choose>
-                    <c:when test="${user.usersex == 1}">
+                    <c:when test="${user.usersex == '1'}">
                         男
                     </c:when>
                     <c:otherwise>

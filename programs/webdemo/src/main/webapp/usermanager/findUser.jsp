@@ -30,7 +30,7 @@
             </li>
             <li>
                 <label>性别：</label>
-                <input name="usersex" type="radio" value="1" checked="checked" />&nbsp;男&nbsp;&nbsp;
+                <input name="usersex" type="radio" value="1" />&nbsp;男&nbsp;&nbsp;
                 <input name="usersex" type="radio" value="0" />&nbsp;女
             </li>
             <li>
