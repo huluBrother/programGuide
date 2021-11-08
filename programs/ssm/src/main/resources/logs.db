@@ -1,0 +1,7 @@
+CREATE TABLE `ssm`.`logs`  (
+  `logid` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(30) NOT NULL,
+  `ip` varchar(30) NOT NULL,
+  `logtime` datetime NOT NULL,
+  PRIMARY KEY (`logid`)
+) ENGINE = InnoDB CHARACTER SET = utf8;
