@@ -10,6 +10,16 @@
     <!-- 配置注解扫描和注解驱动-->
     <context:component-scan base-package="org.example.ssm.web.controller"/>
     <mvc:annotation-driven/>
+    
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/page/login"/>
+            <mvc:exclude-mapping path="/page/error"/>
+            <mvc:exclude-mapping path="/user/userlogin"/>
+            <bean class="org.example.ssm.interceptor.LoginInterception"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <!--配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
