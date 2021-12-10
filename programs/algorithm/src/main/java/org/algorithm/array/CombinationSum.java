@@ -11,8 +11,8 @@ public class CombinationSum {
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> res = new ArrayList<>();
-        backtracking(res,new ArrayList<>(),candidates,target,0);
-        //dfs(candidates,target,0,new ArrayList<>(),res);
+        //backtracking(res,new ArrayList<>(),candidates,target,0);
+        dfs(candidates,target,0,new ArrayList<>(),res);
 
         return res;
     }
@@ -96,8 +96,15 @@ public class CombinationSum {
     }
 
     public static void main(String[] args) {
-        int candidates[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
-        int target = 16;
+
+        /*
+        1 <= candidates.length <= 30
+        1 <= candidates[i] <= 200
+        candidate 中的每个元素都是独一无二的。
+        1 <= target <= 500
+         */
+        int candidates[] = {1};
+        int target = 27;
         long begin = System.currentTimeMillis();
         List<List<Integer>> lists = new CombinationSum().combinationSum(candidates, target);
         long end = System.currentTimeMillis();
